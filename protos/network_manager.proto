@@ -1,0 +1,20 @@
+syntax="proto3";
+
+//Manager service defintion
+service Manager {
+    // turn on Interface
+    rpc turn_on_interface (Interface) returns (InterfaceResponse) {}
+
+    //turn off interface
+    rpc turn_off_interface (Interface) returns (InterfaceResponse) {}
+}
+
+//Request message containg the interface name
+message Interface {
+    string name = 1;
+}
+
+//Response message containing the response message
+message InterfaceResponse {
+    string message = 1;
+}
