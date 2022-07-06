@@ -1,6 +1,6 @@
 # Subject: 
 
-Design and Development of a micro-services-based Network Configuration Project
+Design and Development of a micro-services-based Network Configuration Project.
 
 # Details:
 
@@ -18,7 +18,7 @@ Set the network route configuration.
 # Nice to have:
 **Yocto** : Linux build system
 Project (Yocto) : Development of Yocto recipe for the project.
-
+# Architecture
 [Embedded Device] <-------------------> [Client : Web App , Mobile , Python/C++ ]
 
 # Steps
