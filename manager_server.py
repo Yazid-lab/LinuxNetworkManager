@@ -7,10 +7,13 @@ import network_manager_pb2_grpc
 import subprocess
 
 class Manager(network_manager_pb2_grpc.ManagerServicer):
+
     def turn_off_interface(self, request, context):
         subprocess.run(["sudo","ifconfig",request.name,"down"])
         print(f"turning interface {request.name} off")
         return network_manager_pb2.InterfaceResponse(message=f"hi , interface {request.name} is off")
+
+        
     def turn_on_interface(self, request, context):
         subprocess.run(["sudo","ifconfig",request.name,"up"])
         print(f"turning interface {request.name} on")
