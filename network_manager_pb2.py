@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15network_manager.proto\"\x19\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\"$\n\x11InterfaceResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2x\n\x07Manager\x12\x35\n\x11turn_on_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12turn_off_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15network_manager.proto\"\x19\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\"$\n\x11InterfaceResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2\xb0\x01\n\x07Manager\x12\x35\n\x11turn_on_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12turn_off_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12show_one_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x62\x06proto3')
 
 
 
@@ -42,6 +42,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _INTERFACE._serialized_end=50
   _INTERFACERESPONSE._serialized_start=52
   _INTERFACERESPONSE._serialized_end=88
-  _MANAGER._serialized_start=90
-  _MANAGER._serialized_end=210
+  _MANAGER._serialized_start=91
+  _MANAGER._serialized_end=267
 # @@protoc_insertion_point(module_scope)

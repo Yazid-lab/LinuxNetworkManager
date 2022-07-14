@@ -1,5 +1,6 @@
+from codecs import unicode_escape_decode
 from concurrent import futures
-import imp
+import importlib
 import logging
 import grpc
 import network_manager_pb2
@@ -13,11 +14,16 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
         print(f"turning interface {request.name} off")
         return network_manager_pb2.InterfaceResponse(message=f"hi , interface {request.name} is off")
 
-        
+
     def turn_on_interface(self, request, context):
         subprocess.run(["sudo","ifconfig",request.name,"up"])
         print(f"turning interface {request.name} on")
         return network_manager_pb2.InterfaceResponse(message=f"hi , interface {request.name} is on")
+
+    def show_one_interface(self, request, context):
+        nmcli_output = subprocess.check_output(["ip", "link", "show", request.name]).decode("utf-8")
+        print(nmcli_output)
+        return network_manager_pb2.InterfaceResponse(message=nmcli_output.replace("\n",""))
 
 
 def serve():
