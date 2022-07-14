@@ -7,13 +7,13 @@ Design and Development of a micro-services-based Network Configuration Project.
 The micro-services project is based on **gRPC** and **Protobuf**.
 The language pick is: **C++** / **Python**
 
-The gRPC Network Configuration service should provide the following methods:
-Set Network interface status (up/down)
-Set Network interface main configuration (DHCP/static)
-Set Network interface other configuration (MAC@, metric, ...etc)
-Return list of Network interfaces
-Return the detailed information about one or all interfaces
-Set the network route configuration.
+The gRPC Network Configuration service should provide the following methods: \
+-Set Network interface status (up/down)\
+-Set Network interface main configuration (DHCP/static)\
+-Set Network interface other configuration (MAC@, metric, ...etc)\
+-Return list of Network interfaces\
+-Return the detailed information about one or all interfaces\
+-Set the network route configuration.
 
 # Nice to have:
 **Yocto** : Linux build system
