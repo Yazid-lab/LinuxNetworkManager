@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -e  "press 1 to compile proto file \npress 2 to turn off interface \npress 3 to turn on interface \npress 4 to show interface details "
+echo -e  "press 1 to compile proto file \npress 2 to turn off interface \npress 3 to turn on interface \npress 4 to show interface details\npress 5 to show all interfaces details "
 read -r answer
 case "${answer}" in
     1)
@@ -23,6 +23,9 @@ case "${answer}" in
         read -r interfaceName
         argumentArray=(--plaintext -proto protos/network_manager.proto -d '{"name" : "'${interfaceName}'"}' localhost:5000 Manager.show_one_interface)
         grpcurl "${argumentArray[@]}"
+    ;;
+    5)
+    grpcurl --plaintext -proto protos/network_manager.proto -d '{ }' localhost:5000 Manager.show_all_interfaces
     ;;
     *)
         echo "enter valid option"
