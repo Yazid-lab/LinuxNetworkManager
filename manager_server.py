@@ -30,6 +30,11 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
         print(nmcli_output)
         return network_manager_pb2.InterfaceResponse(message=nmcli_output.replace("\n"," "))
 
+    def list_interfaces(self, request, context):
+        output=subprocess.getoutput('nmcli device status | tail -n +2')
+        print(output)
+        return network_manager_pb2.InterfaceResponse(message=output.replace("\n"," "))
+
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     network_manager_pb2_grpc.add_ManagerServicer_to_server(Manager(),server)

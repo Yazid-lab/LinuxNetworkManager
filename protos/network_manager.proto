@@ -14,6 +14,9 @@ service Manager {
     //show all interfaces config
     rpc show_all_interfaces (EmptyRequest) returns (InterfaceResponse) {}
 
+    //list interfaces
+    rpc list_interfaces(EmptyRequest) returns (InterfaceResponse) {}
+
 }
 
 //Request message containg the interface name
