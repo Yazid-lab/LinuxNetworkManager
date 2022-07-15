@@ -14,12 +14,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15network_manager.proto\"\x19\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\"$\n\x11InterfaceResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2\xb0\x01\n\x07Manager\x12\x35\n\x11turn_on_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12turn_off_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12show_one_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15network_manager.proto\"\x19\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\"$\n\x11InterfaceResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x0e\n\x0c\x45mptyRequest2\xec\x01\n\x07Manager\x12\x35\n\x11turn_on_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12turn_off_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12show_one_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12:\n\x13show_all_interfaces\x12\r.EmptyRequest\x1a\x12.InterfaceResponse\"\x00\x62\x06proto3')
 
 
 
 _INTERFACE = DESCRIPTOR.message_types_by_name['Interface']
 _INTERFACERESPONSE = DESCRIPTOR.message_types_by_name['InterfaceResponse']
+_EMPTYREQUEST = DESCRIPTOR.message_types_by_name['EmptyRequest']
 Interface = _reflection.GeneratedProtocolMessageType('Interface', (_message.Message,), {
   'DESCRIPTOR' : _INTERFACE,
   '__module__' : 'network_manager_pb2'
@@ -34,6 +35,13 @@ InterfaceResponse = _reflection.GeneratedProtocolMessageType('InterfaceResponse'
   })
 _sym_db.RegisterMessage(InterfaceResponse)
 
+EmptyRequest = _reflection.GeneratedProtocolMessageType('EmptyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMPTYREQUEST,
+  '__module__' : 'network_manager_pb2'
+  # @@protoc_insertion_point(class_scope:EmptyRequest)
+  })
+_sym_db.RegisterMessage(EmptyRequest)
+
 _MANAGER = DESCRIPTOR.services_by_name['Manager']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -42,6 +50,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _INTERFACE._serialized_end=50
   _INTERFACERESPONSE._serialized_start=52
   _INTERFACERESPONSE._serialized_end=88
-  _MANAGER._serialized_start=91
-  _MANAGER._serialized_end=267
+  _EMPTYREQUEST._serialized_start=90
+  _EMPTYREQUEST._serialized_end=104
+  _MANAGER._serialized_start=107
+  _MANAGER._serialized_end=343
 # @@protoc_insertion_point(module_scope)

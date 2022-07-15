@@ -25,6 +25,10 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
         print(nmcli_output)
         return network_manager_pb2.InterfaceResponse(message=nmcli_output.replace("\n",""))
 
+    def show_all_interfaces(self, request, context):
+        nmcli_output = subprocess.check_output(["ip", "link", "show"]).decode("utf-8")
+        print(nmcli_output)
+        return network_manager_pb2.InterfaceResponse(message=nmcli_output.replace("\n",""))
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

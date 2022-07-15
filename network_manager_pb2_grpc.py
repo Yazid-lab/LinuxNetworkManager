@@ -30,6 +30,11 @@ class ManagerStub(object):
                 request_serializer=network__manager__pb2.Interface.SerializeToString,
                 response_deserializer=network__manager__pb2.InterfaceResponse.FromString,
                 )
+        self.show_all_interfaces = channel.unary_unary(
+                '/Manager/show_all_interfaces',
+                request_serializer=network__manager__pb2.EmptyRequest.SerializeToString,
+                response_deserializer=network__manager__pb2.InterfaceResponse.FromString,
+                )
 
 
 class ManagerServicer(object):
@@ -51,7 +56,14 @@ class ManagerServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def show_one_interface(self, request, context):
-        """show all interfaces
+        """show one interfaces
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def show_all_interfaces(self, request, context):
+        """show all interfaces config
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -73,6 +85,11 @@ def add_ManagerServicer_to_server(servicer, server):
             'show_one_interface': grpc.unary_unary_rpc_method_handler(
                     servicer.show_one_interface,
                     request_deserializer=network__manager__pb2.Interface.FromString,
+                    response_serializer=network__manager__pb2.InterfaceResponse.SerializeToString,
+            ),
+            'show_all_interfaces': grpc.unary_unary_rpc_method_handler(
+                    servicer.show_all_interfaces,
+                    request_deserializer=network__manager__pb2.EmptyRequest.FromString,
                     response_serializer=network__manager__pb2.InterfaceResponse.SerializeToString,
             ),
     }
@@ -133,6 +150,23 @@ class Manager(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Manager/show_one_interface',
             network__manager__pb2.Interface.SerializeToString,
+            network__manager__pb2.InterfaceResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def show_all_interfaces(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Manager/show_all_interfaces',
+            network__manager__pb2.EmptyRequest.SerializeToString,
             network__manager__pb2.InterfaceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

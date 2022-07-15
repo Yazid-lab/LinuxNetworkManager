@@ -8,8 +8,12 @@ service Manager {
     //turn off interface
     rpc turn_off_interface (Interface) returns (InterfaceResponse) {}
 
-    // show all interfaces
+    // show one interfaces
     rpc show_one_interface (Interface) returns (InterfaceResponse) {}
+
+    //show all interfaces config
+    rpc show_all_interfaces (EmptyRequest) returns (InterfaceResponse) {}
+
 }
 
 //Request message containg the interface name
@@ -20,4 +24,10 @@ message Interface {
 //Response message containing the response message
 message InterfaceResponse {
     string message = 1;
+}
+
+// Empty message 
+
+message EmptyRequest {
+    
 }
