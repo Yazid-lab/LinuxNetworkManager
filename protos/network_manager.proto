@@ -15,7 +15,13 @@ service Manager {
     rpc show_all_interfaces (EmptyRequest) returns (InterfaceResponse) {}
 
     //list interfaces
-    rpc list_interfaces(EmptyRequest) returns (InterfaceResponse) {}
+    rpc list_interfaces (EmptyRequest) returns (InterfaceResponse) {}
+
+    //set configuration to dhcp
+    rpc set_configuration_dhcp (Interface) returns (ConfigResponse) {}
+
+    //set config to static
+    rpc set_configuration_static(StaticConfig) returns (ConfigResponse) {}
 
 }
 
@@ -33,4 +39,17 @@ message InterfaceResponse {
 
 message EmptyRequest {
     
+}
+
+//Response message containing response from the config
+message ConfigResponse {
+    string message=1;
+}
+
+//Request message containing static config details
+message StaticConfig{
+    string interface=1;
+    string ipv4_address=2;
+    string ipv4_gateway=3;
+    string ipv4_dns=4;
 }

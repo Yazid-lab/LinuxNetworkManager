@@ -40,6 +40,16 @@ class ManagerStub(object):
                 request_serializer=network__manager__pb2.EmptyRequest.SerializeToString,
                 response_deserializer=network__manager__pb2.InterfaceResponse.FromString,
                 )
+        self.set_configuration_dhcp = channel.unary_unary(
+                '/Manager/set_configuration_dhcp',
+                request_serializer=network__manager__pb2.Interface.SerializeToString,
+                response_deserializer=network__manager__pb2.ConfigResponse.FromString,
+                )
+        self.set_configuration_static = channel.unary_unary(
+                '/Manager/set_configuration_static',
+                request_serializer=network__manager__pb2.StaticConfig.SerializeToString,
+                response_deserializer=network__manager__pb2.ConfigResponse.FromString,
+                )
 
 
 class ManagerServicer(object):
@@ -81,6 +91,20 @@ class ManagerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def set_configuration_dhcp(self, request, context):
+        """set configuration to dhcp
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def set_configuration_static(self, request, context):
+        """set config to static
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ManagerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -108,6 +132,16 @@ def add_ManagerServicer_to_server(servicer, server):
                     servicer.list_interfaces,
                     request_deserializer=network__manager__pb2.EmptyRequest.FromString,
                     response_serializer=network__manager__pb2.InterfaceResponse.SerializeToString,
+            ),
+            'set_configuration_dhcp': grpc.unary_unary_rpc_method_handler(
+                    servicer.set_configuration_dhcp,
+                    request_deserializer=network__manager__pb2.Interface.FromString,
+                    response_serializer=network__manager__pb2.ConfigResponse.SerializeToString,
+            ),
+            'set_configuration_static': grpc.unary_unary_rpc_method_handler(
+                    servicer.set_configuration_static,
+                    request_deserializer=network__manager__pb2.StaticConfig.FromString,
+                    response_serializer=network__manager__pb2.ConfigResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -202,5 +236,39 @@ class Manager(object):
         return grpc.experimental.unary_unary(request, target, '/Manager/list_interfaces',
             network__manager__pb2.EmptyRequest.SerializeToString,
             network__manager__pb2.InterfaceResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def set_configuration_dhcp(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Manager/set_configuration_dhcp',
+            network__manager__pb2.Interface.SerializeToString,
+            network__manager__pb2.ConfigResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def set_configuration_static(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Manager/set_configuration_static',
+            network__manager__pb2.StaticConfig.SerializeToString,
+            network__manager__pb2.ConfigResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

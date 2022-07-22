@@ -1,8 +1,10 @@
 from codecs import unicode_escape_decode
 from concurrent import futures
+from email import message
 import importlib
 import logging
 import grpc
+from tempita import sub
 import network_manager_pb2
 import network_manager_pb2_grpc
 import subprocess
@@ -35,6 +37,15 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
         print(output)
         return network_manager_pb2.InterfaceResponse(message=output.replace("\n"," "))
 
+    def set_configuration_dhcp(self, request, context):
+        subprocess.run(["nmcli","device","modify",request.name,"ipv4.method","auto"])
+        return network_manager_pb2.ConfigResponse(message=f"interface {request.name} is set to dhcp.")
+
+    def set_configuration_static(self, request, context):
+        subprocess.run(["nmcli","device","modify",request.interface,"ipv4.method","manual","ipv4.addresses",request.ipv4_address,"gw4",request.ipv4_gateway,"ipv4.dns",request.ipv4_dns])
+        return network_manager_pb2.ConfigResponse(message=f"interface {request.interface} is set to static.")
+
+        
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     network_manager_pb2_grpc.add_ManagerServicer_to_server(Manager(),server)
