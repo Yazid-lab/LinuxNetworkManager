@@ -50,6 +50,11 @@ class ManagerStub(object):
                 request_serializer=network__manager__pb2.StaticConfig.SerializeToString,
                 response_deserializer=network__manager__pb2.ConfigResponse.FromString,
                 )
+        self.add_network_route = channel.unary_unary(
+                '/Manager/add_network_route',
+                request_serializer=network__manager__pb2.RouteConfig.SerializeToString,
+                response_deserializer=network__manager__pb2.ConfigResponse.FromString,
+                )
 
 
 class ManagerServicer(object):
@@ -105,6 +110,13 @@ class ManagerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def add_network_route(self, request, context):
+        """add static route to network
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ManagerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -141,6 +153,11 @@ def add_ManagerServicer_to_server(servicer, server):
             'set_configuration_static': grpc.unary_unary_rpc_method_handler(
                     servicer.set_configuration_static,
                     request_deserializer=network__manager__pb2.StaticConfig.FromString,
+                    response_serializer=network__manager__pb2.ConfigResponse.SerializeToString,
+            ),
+            'add_network_route': grpc.unary_unary_rpc_method_handler(
+                    servicer.add_network_route,
+                    request_deserializer=network__manager__pb2.RouteConfig.FromString,
                     response_serializer=network__manager__pb2.ConfigResponse.SerializeToString,
             ),
     }
@@ -269,6 +286,23 @@ class Manager(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Manager/set_configuration_static',
             network__manager__pb2.StaticConfig.SerializeToString,
+            network__manager__pb2.ConfigResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def add_network_route(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Manager/add_network_route',
+            network__manager__pb2.RouteConfig.SerializeToString,
             network__manager__pb2.ConfigResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

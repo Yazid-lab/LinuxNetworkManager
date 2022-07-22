@@ -23,6 +23,9 @@ service Manager {
     //set config to static
     rpc set_configuration_static(StaticConfig) returns (ConfigResponse) {}
 
+    //add static route to network
+    rpc add_network_route(RouteConfig) returns (ConfigResponse) {}
+
 }
 
 //Request message containg the interface name
@@ -52,4 +55,11 @@ message StaticConfig{
     string ipv4_address=2;
     string ipv4_gateway=3;
     string ipv4_dns=4;
+}
+
+//Request message containing route config
+message RouteConfig{
+    string destination=1;
+    string route=2;
+    string interface=3;
 }

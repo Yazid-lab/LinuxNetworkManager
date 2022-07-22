@@ -1,5 +1,6 @@
 from codecs import unicode_escape_decode
 from concurrent import futures
+from doctest import OutputChecker
 from email import message
 import importlib
 import logging
@@ -45,7 +46,15 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
         subprocess.run(["nmcli","device","modify",request.interface,"ipv4.method","manual","ipv4.addresses",request.ipv4_address,"gw4",request.ipv4_gateway,"ipv4.dns",request.ipv4_dns])
         return network_manager_pb2.ConfigResponse(message=f"interface {request.interface} is set to static.")
 
-        
+    def add_network_route(self, request, context):
+        process=subprocess.Popen(["sudo","ip","route","add",request.destination,"via",request.route,"dev",request.interface],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        stdout,stderr=process.communicate()
+        return_code=process.returncode
+        if(return_code==0):
+            ouput="network route added"
+        else:
+            output=stderr
+        return network_manager_pb2.ConfigResponse(message=output)
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     network_manager_pb2_grpc.add_ManagerServicer_to_server(Manager(),server)
