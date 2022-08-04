@@ -1,7 +1,5 @@
 from codecs import unicode_escape_decode
 from concurrent import futures
-from doctest import OutputChecker
-from email import message
 import importlib
 import logging
 import grpc
@@ -51,7 +49,7 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
         stdout,stderr=process.communicate()
         return_code=process.returncode
         if(return_code==0):
-            ouput="network route added"
+            output="network route added"
         else:
             output=stderr
         return network_manager_pb2.ConfigResponse(message=output)
@@ -64,4 +62,4 @@ def serve():
 
 if __name__ == '__main__':
     logging.basicConfig()
-    serve()
+    serve() 
