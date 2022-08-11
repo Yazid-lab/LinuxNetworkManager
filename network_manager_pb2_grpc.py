@@ -55,6 +55,11 @@ class ManagerStub(object):
                 request_serializer=network__manager__pb2.RouteConfig.SerializeToString,
                 response_deserializer=network__manager__pb2.ConfigResponse.FromString,
                 )
+        self.change_mac_address = channel.unary_unary(
+                '/Manager/change_mac_address',
+                request_serializer=network__manager__pb2.InterfaceMac.SerializeToString,
+                response_deserializer=network__manager__pb2.InterfaceResponse.FromString,
+                )
 
 
 class ManagerServicer(object):
@@ -117,6 +122,13 @@ class ManagerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def change_mac_address(self, request, context):
+        """change mac address
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ManagerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -159,6 +171,11 @@ def add_ManagerServicer_to_server(servicer, server):
                     servicer.add_network_route,
                     request_deserializer=network__manager__pb2.RouteConfig.FromString,
                     response_serializer=network__manager__pb2.ConfigResponse.SerializeToString,
+            ),
+            'change_mac_address': grpc.unary_unary_rpc_method_handler(
+                    servicer.change_mac_address,
+                    request_deserializer=network__manager__pb2.InterfaceMac.FromString,
+                    response_serializer=network__manager__pb2.InterfaceResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -304,5 +321,22 @@ class Manager(object):
         return grpc.experimental.unary_unary(request, target, '/Manager/add_network_route',
             network__manager__pb2.RouteConfig.SerializeToString,
             network__manager__pb2.ConfigResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def change_mac_address(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Manager/change_mac_address',
+            network__manager__pb2.InterfaceMac.SerializeToString,
+            network__manager__pb2.InterfaceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

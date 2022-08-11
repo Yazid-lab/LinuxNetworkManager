@@ -26,6 +26,14 @@ service Manager {
     //add static route to network
     rpc add_network_route(RouteConfig) returns (ConfigResponse) {}
 
+    //change mac address
+    rpc change_mac_address(InterfaceMac) returns (InterfaceResponse) {}
+}
+
+//Request message containg the interface name and the mac address
+message InterfaceMac {
+    string name = 1;
+    string address = 2;
 }
 
 //Request message containg the interface name

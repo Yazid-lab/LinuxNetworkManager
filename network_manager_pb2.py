@@ -14,16 +14,24 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15network_manager.proto\"\x19\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\"$\n\x11InterfaceResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x0e\n\x0c\x45mptyRequest\"!\n\x0e\x43onfigResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"_\n\x0cStaticConfig\x12\x11\n\tinterface\x18\x01 \x01(\t\x12\x14\n\x0cipv4_address\x18\x02 \x01(\t\x12\x14\n\x0cipv4_gateway\x18\x03 \x01(\t\x12\x10\n\x08ipv4_dns\x18\x04 \x01(\t\"D\n\x0bRouteConfig\x12\x13\n\x0b\x64\x65stination\x18\x01 \x01(\t\x12\r\n\x05route\x18\x02 \x01(\t\x12\x11\n\tinterface\x18\x03 \x01(\t2\xd1\x03\n\x07Manager\x12\x35\n\x11turn_on_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12turn_off_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12show_one_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12:\n\x13show_all_interfaces\x12\r.EmptyRequest\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x0flist_interfaces\x12\r.EmptyRequest\x1a\x12.InterfaceResponse\"\x00\x12\x37\n\x16set_configuration_dhcp\x12\n.Interface\x1a\x0f.ConfigResponse\"\x00\x12<\n\x18set_configuration_static\x12\r.StaticConfig\x1a\x0f.ConfigResponse\"\x00\x12\x34\n\x11\x61\x64\x64_network_route\x12\x0c.RouteConfig\x1a\x0f.ConfigResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15network_manager.proto\"-\n\x0cInterfaceMac\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x02 \x01(\t\"\x19\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\"$\n\x11InterfaceResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x0e\n\x0c\x45mptyRequest\"!\n\x0e\x43onfigResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"_\n\x0cStaticConfig\x12\x11\n\tinterface\x18\x01 \x01(\t\x12\x14\n\x0cipv4_address\x18\x02 \x01(\t\x12\x14\n\x0cipv4_gateway\x18\x03 \x01(\t\x12\x10\n\x08ipv4_dns\x18\x04 \x01(\t\"D\n\x0bRouteConfig\x12\x13\n\x0b\x64\x65stination\x18\x01 \x01(\t\x12\r\n\x05route\x18\x02 \x01(\t\x12\x11\n\tinterface\x18\x03 \x01(\t2\x8c\x04\n\x07Manager\x12\x35\n\x11turn_on_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12turn_off_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x12show_one_interface\x12\n.Interface\x1a\x12.InterfaceResponse\"\x00\x12:\n\x13show_all_interfaces\x12\r.EmptyRequest\x1a\x12.InterfaceResponse\"\x00\x12\x36\n\x0flist_interfaces\x12\r.EmptyRequest\x1a\x12.InterfaceResponse\"\x00\x12\x37\n\x16set_configuration_dhcp\x12\n.Interface\x1a\x0f.ConfigResponse\"\x00\x12<\n\x18set_configuration_static\x12\r.StaticConfig\x1a\x0f.ConfigResponse\"\x00\x12\x34\n\x11\x61\x64\x64_network_route\x12\x0c.RouteConfig\x1a\x0f.ConfigResponse\"\x00\x12\x39\n\x12\x63hange_mac_address\x12\r.InterfaceMac\x1a\x12.InterfaceResponse\"\x00\x62\x06proto3')
 
 
 
+_INTERFACEMAC = DESCRIPTOR.message_types_by_name['InterfaceMac']
 _INTERFACE = DESCRIPTOR.message_types_by_name['Interface']
 _INTERFACERESPONSE = DESCRIPTOR.message_types_by_name['InterfaceResponse']
 _EMPTYREQUEST = DESCRIPTOR.message_types_by_name['EmptyRequest']
 _CONFIGRESPONSE = DESCRIPTOR.message_types_by_name['ConfigResponse']
 _STATICCONFIG = DESCRIPTOR.message_types_by_name['StaticConfig']
 _ROUTECONFIG = DESCRIPTOR.message_types_by_name['RouteConfig']
+InterfaceMac = _reflection.GeneratedProtocolMessageType('InterfaceMac', (_message.Message,), {
+  'DESCRIPTOR' : _INTERFACEMAC,
+  '__module__' : 'network_manager_pb2'
+  # @@protoc_insertion_point(class_scope:InterfaceMac)
+  })
+_sym_db.RegisterMessage(InterfaceMac)
+
 Interface = _reflection.GeneratedProtocolMessageType('Interface', (_message.Message,), {
   'DESCRIPTOR' : _INTERFACE,
   '__module__' : 'network_manager_pb2'
@@ -70,18 +78,20 @@ _MANAGER = DESCRIPTOR.services_by_name['Manager']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _INTERFACE._serialized_start=25
-  _INTERFACE._serialized_end=50
-  _INTERFACERESPONSE._serialized_start=52
-  _INTERFACERESPONSE._serialized_end=88
-  _EMPTYREQUEST._serialized_start=90
-  _EMPTYREQUEST._serialized_end=104
-  _CONFIGRESPONSE._serialized_start=106
-  _CONFIGRESPONSE._serialized_end=139
-  _STATICCONFIG._serialized_start=141
-  _STATICCONFIG._serialized_end=236
-  _ROUTECONFIG._serialized_start=238
-  _ROUTECONFIG._serialized_end=306
-  _MANAGER._serialized_start=309
-  _MANAGER._serialized_end=774
+  _INTERFACEMAC._serialized_start=25
+  _INTERFACEMAC._serialized_end=70
+  _INTERFACE._serialized_start=72
+  _INTERFACE._serialized_end=97
+  _INTERFACERESPONSE._serialized_start=99
+  _INTERFACERESPONSE._serialized_end=135
+  _EMPTYREQUEST._serialized_start=137
+  _EMPTYREQUEST._serialized_end=151
+  _CONFIGRESPONSE._serialized_start=153
+  _CONFIGRESPONSE._serialized_end=186
+  _STATICCONFIG._serialized_start=188
+  _STATICCONFIG._serialized_end=283
+  _ROUTECONFIG._serialized_start=285
+  _ROUTECONFIG._serialized_end=353
+  _MANAGER._serialized_start=356
+  _MANAGER._serialized_end=880
 # @@protoc_insertion_point(module_scope)

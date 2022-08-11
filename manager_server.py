@@ -50,6 +50,16 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
         else:
             output=stderr
         return network_manager_pb2.ConfigResponse(message=output)
+    def change_mac_address(self, request, context):
+        process=subprocess.Popen(["nmcli","device","modify",request.name,"cloned-mac",request.address],
+                stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        stderr=process.communicate()[1]
+        return_code=process.returncode
+        if(return_code==0):
+            output="network route added"
+        else:
+            output=stderr
+        return network_manager_pb2.ConfigResponse(message=output)
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     network_manager_pb2_grpc.add_ManagerServicer_to_server(Manager(),server)
