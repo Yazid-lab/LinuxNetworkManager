@@ -1,9 +1,6 @@
-from codecs import unicode_escape_decode
 from concurrent import futures
-import importlib
 import logging
 import grpc
-from tempita import sub
 import network_manager_pb2
 import network_manager_pb2_grpc
 import subprocess
@@ -46,7 +43,7 @@ class Manager(network_manager_pb2_grpc.ManagerServicer):
 
     def add_network_route(self, request, context):
         process=subprocess.Popen(["sudo","ip","route","add",request.destination,"via",request.route,"dev",request.interface],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-        stdout,stderr=process.communicate()
+        stderr=process.communicate()[1]
         return_code=process.returncode
         if(return_code==0):
             output="network route added"

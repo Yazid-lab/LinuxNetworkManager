@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -e  "press 1 to compile proto file \npress 2 to turn off interface \npress 3 to turn on interface \npress 4 to show interface details\npress 5 to show all interfaces details\npress 6 to list availabe interfaces "
+echo -e  "press 1 to compile proto file \npress 2 to turn off interface \npress 3 to turn on interface \npress 4 to show interface details\npress 5 to show all interfaces details\npress 6 to list availabe interfaces\npress 7 to add a new route"
 read -r answer
 case "${answer}" in
     1)
@@ -29,6 +29,12 @@ case "${answer}" in
     ;;
     6)
     grpcurl --plaintext -proto protos/network_manager.proto -d '{ }' localhost:5000 Manager.list_interfaces
+    ;;
+    7)
+	echo "enter route ip"
+	read -r route
+	argumentArray=(--plaintext -proto protos/network_manager.proto -d '{"message" : "'${route}'"}' localhost:5000 Manager.add_network_route)
+	grpcurl "${argumentArray[@]}"
     ;;
     *)
         echo "enter valid option"
